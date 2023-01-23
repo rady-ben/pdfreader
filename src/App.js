@@ -1,27 +1,17 @@
 import React, { useState } from "react";
-import { Document, Page, pdfjs } from "react-pdf";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 function MyApp() {
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-
-  function onDocumentLoadSuccess({ numPages }) {
-    setNumPages(numPages);
-  }
-
   return (
     <div>
+      <p>radhouane ben</p>
       <Document
-        onLoadError={console.error}
-        file="0410100.pdf"
-        onLoadSuccess={onDocumentLoadSuccess}
+        file="/0410100.pdf"
+        onLoadSuccess={() => {
+          console.log("loaded success");
+        }}
       >
-        <Page />
+        <Page height="600" pageNumber={1} />
       </Document>
-      <p>
-        Page {pageNumber} of {numPages}
-      </p>
     </div>
   );
 }
